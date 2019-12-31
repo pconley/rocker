@@ -6,7 +6,7 @@ let Song = EmberObject.extend({
   title: '',
   band: '',
   rating: 0
-  });
+});
 
 export default Route.extend({
   model() {
@@ -25,7 +25,7 @@ export default Route.extend({
     // let pretender = EmberObject.create({
     let pretender = Song.create({
       title: 'The Pretender',
-      band: 'Food Fighters',
+      band: 'Foo Fighters',
       rating: 2
     });
     return A([blackDog, yellowLedbetter, pretender]);
