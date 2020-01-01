@@ -1,5 +1,4 @@
 <div class="rr-sidebar">
-  side panel
   <ul class="rr-list">
     {{#each this.model as |band|}}
       <li class="rr-list-item">
@@ -12,8 +11,36 @@
       </li>
     {{/each}}
   </ul>
+  <div class="rr-new-label">
+    {{#if this.isAddingBand}}
+      <form class="rr-inline-form" {{on "submit" this.saveBand}}>
+        <Input
+          @type="text"
+          @value={{this.newBandName}}
+          class="rr-input"
+          placeholder="New band"
+          data-test-rr="new-band-input"
+        />
+        <button
+          type="submit"
+          class="rr-action-button"
+          disabled={{this.isBandNameEmpty}}>
+          Add
+        </button>
+        <button
+          class="rr-cancel-icon"
+          {{on "click" this.cancelAddBand}}>
+          {{fa-icon "times"}}
+        </button>
+      </form>
+    {{else}}
+      <label {{on "click" this.addBand}}>
+        {{fa-icon "plus"}}
+        <span class="ml1">Add new band</span>
+      </label>
+    {{/if}}
+</div>
 </div>
 <div class="rr-main-panel">
-  main panel
   {{outlet}}
 </div>
