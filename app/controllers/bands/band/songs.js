@@ -20,6 +20,8 @@ export default Controller.extend({
     console.log("songs controller. model...",this.model);
     this.model.songs.pushObject(newSong);
     this.set('newSongName', '');
-    // this.set('isAddingSong',false);
+  }),
+  updateRating: action(function(song, rating) {
+    song.set('rating', song.rating === rating ? rating-1 : rating);
   }),
 });

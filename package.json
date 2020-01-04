@@ -38,6 +38,7 @@
     "ember-fetch": "^6.7.0",
     "ember-font-awesome": "^4.0.0-rc.4",
     "ember-load-initializers": "^2.1.0",
+    "ember-math-helpers": "^2.12.1",
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-qunit": "^4.5.1",
     "ember-resolver": "^5.3.0",
@@ -50,5 +51,8 @@
   },
   "engines": {
     "node": "8.* || >= 10.*"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15"
   }
 }
