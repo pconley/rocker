@@ -6,8 +6,9 @@ import Song from 'rocker/models/song';
 export default Controller.extend({
 
   isAddingSong: false,
-  isSongNameEmpty: empty('newSongName'),
   newSongName: '',
+  
+  isSongNameEmpty: empty('newSongName'),
   addSong: action(function() {
     this.set('isAddingSong',true);
   }),
@@ -24,4 +25,10 @@ export default Controller.extend({
   updateRating: action(function(song, rating) {
     song.set('rating', song.rating === rating ? rating-1 : rating);
   }),
+  reset: function(){
+    this.setProperties({
+      isAddingSong: false,
+      newSongTitle: ''
+    });
+  }
 });
