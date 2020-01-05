@@ -3,8 +3,6 @@ import { action } from '@ember/object';
 import { empty } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 
-import Band from 'rocker/models/band';
-
 export default Controller.extend({
   router: service(),
   isAddingBand: false,
@@ -12,15 +10,13 @@ export default Controller.extend({
   newBandName: '',
   addBand: action(function() {this.set('isAddingBand',true);}),
   cancelAddBand: action(function() {this.set('isAddingBand',false);}),
-  saveBand: action(function(event) {
+
+  saveBand: action(async function(event) {
     event.preventDefault();
-    let newBand = Band.create({ name: this.newBandName });
-    this.model.pushObject(newBand);
-    this.setProperties({
-      newBandName: '',
-      isAddingBand: false
-    });
-    newBand.set('slug', dasherize(newBand.name));
-    this.router.transitionTo('bands.band.songs', newBand.slug);
+    let newBand = this.store.createRecord('band', { name: this.newBandName });
+    await newBand.save();
+    this.setProperties({ newBandName: '', isAddingBand: false });
+    this.router.transitionTo('bands.band.songs', newBand.id);
   }),
+
 });

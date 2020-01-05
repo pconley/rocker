@@ -13,16 +13,17 @@ const Router = EmberRouter.extend({
 
 setDocumentTitle() {
   this.on('routeDidChange', (transition) => {
-    let slug = transition.to.parent.params.slug; 
-    let band = slug ? ": "+slug.split('-').map(w=>capitalize(w)).join(' ') : ": Bands"; 
-    document.title = "Rocker"+band;
+    // console.log("router::routeDidChange", transition.to);
+    let id = transition.to.parent.params.id;
+    let band = id ? id.split('-').map(w=>capitalize(w)).join(' ') : "Bands"; 
+    document.title = "Rocker: "+band;
   });
 }
 });
 
 Router.map(function() {
   this.route('bands', function() {
-    this.route('band', { path: ':slug' }, function() {
+    this.route('band', { path: ':id' }, function() {
       this.route('songs');
       this.route('details');
     });

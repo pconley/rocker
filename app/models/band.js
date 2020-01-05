@@ -1,12 +1,8 @@
-import EmberObject from '@ember/object';
+import Model, { attr, hasMany } from '@ember-data/model';
 
-export default EmberObject.extend({
-  name: '',
-  description: '',
-
-  init() {
-    // allow create w/ and w/out array arg
-    this._super(...arguments);
-    if (!this.songs) { this.set('songs', []); }
-  },
+export default Model.extend({
+  name: attr(),
+  description: attr(),
+  songs: hasMany('song'),
+  // songs: hasMany(), // this also works
 });

@@ -5,6 +5,8 @@ A short introduction of this app could easily go here.
 
 ## Notes
 
+ember serve --proxy=http://json-api.rockandrollwithemberjs.com
+
 ### Chapter 3
 
 For me using ember inspector required using the model explicitly: blackDog = $E.model.firstObject;
