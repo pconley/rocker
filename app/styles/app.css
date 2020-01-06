@@ -151,3 +151,9 @@ a {
   color: inherit;
   background-color: inherit;
 }
+
+#ember-testing-container {
+  font-family: 'avenir next', avenir, sans-serif;
+  color: var(--near-white);
+  background-color: var(--mid-grey) !important;
+}

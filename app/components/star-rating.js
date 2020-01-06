@@ -19,4 +19,4 @@ export default class StarRating extends Component {
   @action setRating(newRating) {
     this.onClick(newRating);
   }
-};
+}

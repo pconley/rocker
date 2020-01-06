@@ -1,6 +1,8 @@
 
 {{#each this.stars as |star index|}}
-  <button class="rr-rating-star" {{on "click" (fn this.setRating (add index 1)) }}>
+  <button class="rr-rating-star"
+    data-test-rr={{concat "star-rating-" (add index 1)}}
+    {{on "click" (fn this.setRating (add index 1)) }}>
     {{#if star}}
       {{fa-icon "star"}}
     {{else}}

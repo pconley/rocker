@@ -5,7 +5,6 @@ export default Route.extend({
   router: service(),
 
   beforeModel() {
-    console.log("index: before model");
     this.router.transitionTo('bands');
   }
 });
