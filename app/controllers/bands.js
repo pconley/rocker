@@ -17,6 +17,6 @@ export default Controller.extend({
     await newBand.save();
     this.setProperties({ newBandName: '', isAddingBand: false });
     this.router.transitionTo('bands.band.songs', newBand.id);
-  }),
+  })
 
 });
