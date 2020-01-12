@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { action, computed } from '@ember/object';
 import { empty, sort } from '@ember/object/computed';
+import { capitalize } from 'rocker/helpers/capitalize';
 
 export default Controller.extend({
 
@@ -13,6 +14,11 @@ export default Controller.extend({
   newSongTitle: '',
   sortBy: 'ratingDesc',
   searchTerm: '',
+
+  newSongPlaceholder:  computed('model.name', function() {
+    let bandName = this.model.name;
+    return `New ${capitalize(bandName)} song`;
+    }),
 
   matchingSongs: computed('model.songs.@each.title', 'searchTerm',
     function() {
