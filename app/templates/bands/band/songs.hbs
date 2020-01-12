@@ -1,5 +1,66 @@
+<div class="rr-controls-panel">
+  <button class="rr-sort-button" data-test-rr="sort-by-rating-desc" {{on "click" (fn this.updateSortBy "ratingDesc")}}>
+    Rating
+    {{fa-icon "angle-down"}}
+  </button>
+  <button class="rr-sort-button" data-test-rr="sort-by-rating-asc" {{on "click" (fn this.updateSortBy "ratingAsc")}}>
+    Rating
+    {{fa-icon "angle-up"}}
+  </button>
+  <button class="rr-sort-button" data-test-rr="sort-by-title-desc" {{on "click" (fn this.updateSortBy "titleDesc")}}>
+    Title
+    {{fa-icon "angle-down"}}
+  </button>
+  <button class="rr-sort-button" data-test-rr="sort-by-title-asc" {{on "click" (fn this.updateSortBy "titleAsc")}}>
+    Title
+    {{fa-icon "angle-up"}}
+  </button>
+</div>
+
+<div class="rr-controls-panel">
+  <div class="rr-sort-panel">
+    <LinkTo
+      @query={{hash s="ratingDesc"}}
+      class="rr-sort-button"
+      data-test-rr="sort-by-rating-desc"
+    >
+      Rating
+      {{fa-icon "angle-down"}}
+    </LinkTo>
+    <LinkTo
+      @query={{hash s="ratingAsc"}}
+      class="rr-sort-button"
+      data-test-rr="sort-by-rating-asc"
+    >
+      Rating
+      {{fa-icon "angle-up"}}
+    </LinkTo>
+    <LinkTo
+      @query={{hash s="titleDesc"}}
+      class="rr-sort-button"
+      data-test-rr="sort-by-title-desc"
+    >
+      Title
+      {{fa-icon "angle-down"}}
+    </LinkTo>
+    <LinkTo
+      @query={{hash s="titleAsc"}}
+      class="rr-sort-button"
+      data-test-rr="sort-by-title-asc"
+    >
+      Title
+      {{fa-icon "angle-up"}}
+    </LinkTo>
+  </div>
+</div>
+
+<div class="rr-search-panel">
+  <Input @type="text" class="rr-input" @value={{this.searchTerm}} data-test-rr="search-box" />
+  <div class="rr-search-icon">{{fa-icon "search"}}</div>
+</div>
+
 <ul class="rr-list">
-  {{#each this.model.songs as |song|}}
+  {{#each this.sortedSongs as |song|}}
     <li class="rr-list-item" data-test-rr="song-list-item">
       {{song.title}} 
       <StarRating class="fr"
@@ -19,7 +80,7 @@
     <form class="rr-inline-form" {{on "submit" this.saveSong}} data-test-rr="new-song-form">
       <Input
         @type="text"
-        @value={{this.newSongName}}
+        @value={{this.newSongTitle}}
         class="rr-input"
         placeholder="New Song"
         data-test-rr="new-song-input"
@@ -28,7 +89,7 @@
         type="submit"
         class="rr-action-button"
         data-test-rr="new-song-button"
-        disabled={{this.isSongNameEmpty}}>
+        disabled={{this.isSongTitleEmpty}}>
         Add
       </button>
       <button

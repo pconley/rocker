@@ -9,12 +9,12 @@ module('Unit | Controller | bands/band/songs', function(hooks) {
     assert.ok(controller);
   });
 
-  test('isSongNameEmpty', function(assert) {
+  test('isSongTitleEmpty', function(assert) {
     let controller = this.owner.lookup('controller:bands/band/songs');
-    controller.set('newSongName', 'Belenos');
-    assert.notOk(controller.get('isSongNameEmpty'), 'The button is not disabled when there is a title');
-    controller.set('newSongName', '');
-    assert.ok(controller.get('isSongNameEmpty'), 'The button is disabled when the title is empty');
+    controller.set('newSongTitle', 'Belenos');
+    assert.notOk(controller.get('isSongTitleEmpty'), 'The button is not disabled when there is a title');
+    controller.set('newSongTitle', '');
+    assert.ok(controller.get('isSongTitleEmpty'), 'The button is disabled when the title is empty');
   });
 
 });

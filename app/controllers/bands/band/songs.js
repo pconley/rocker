@@ -1,13 +1,40 @@
 import Controller from '@ember/controller';
-import { action } from '@ember/object';
-import { empty } from '@ember/object/computed';
+import { action, computed } from '@ember/object';
+import { empty, sort } from '@ember/object/computed';
 
 export default Controller.extend({
 
+  queryParams: {
+    sortBy: 's',
+    searchTerm: 'q',
+  },
+
   isAddingSong: false,
-  newSongName: '',
+  newSongTitle: '',
+  sortBy: 'ratingDesc',
+  searchTerm: '',
+
+  matchingSongs: computed('model.songs.@each.title', 'searchTerm',
+    function() {
+      let searchTerm = this.searchTerm.toLowerCase();
+      return this.model.get('songs').filter((song) => {
+        return song.title.toLowerCase().includes(searchTerm);
+      });
+  }),
+
+  sortProperties: computed('sortBy', function() {
+    let options = {
+      ratingDesc: ['rating:desc', 'title:asc'],
+      ratingAsc: ['rating:asc', 'title:asc'],
+      titleDesc: ['title:desc'],
+      titleAsc: ['title:asc']
+    };
+    return options[this.sortBy];
+  }),
+
+  sortedSongs: sort('matchingSongs', 'sortProperties'),
   
-  isSongNameEmpty: empty('newSongName'),
+  isSongTitleEmpty: empty('newSongTitle'),
   
   addSong: action(function() {
     this.set('isAddingSong',true);
@@ -21,11 +48,15 @@ export default Controller.extend({
     event.preventDefault();
     console.log("controllers::songs::saveSong model=",this.model)
     let newSong = this.store.createRecord('song', {
-      title: this.get('newSongName'),
+      title: this.get('newSongTitle'),
       band: this.model // the relationship, not the name!
     });
     await newSong.save();
-    this.set('newSongName', '');
+    this.set('newSongTitle', '');
+  }),
+
+  updateSortBy: action(function(sortBy) {
+    this.set('sortBy', sortBy);
   }),
 
   updateRating: action(function(song, rating) {

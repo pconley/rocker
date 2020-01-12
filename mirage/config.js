@@ -3,6 +3,12 @@ export default function() {
   this.get('/bands');
   this.get('/bands/:id');
   this.post('/bands');
+  // this.get('/bands/:id/songs'); // fails
+  this.get('/bands/:id/songs', function(schema, request) {
+    // console.log("mirage config. id=",id);
+    let id = request.params.id;
+    return schema.songs.where({ bandId: id });
+  });
 
   // These comments are here to help you get started. Feel free to delete them.
 
